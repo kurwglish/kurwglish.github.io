@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telling the Time in English (A1 Level) - Interactive Practice</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --past-color: #10b981;
+      --to-color: #f59e0b;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #22c55e;
+      --error: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: white;
+      padding: 20px 24px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.55rem;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .nav-tabs {
+      display: flex;
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 14px 12px;
+      border: none;
+      background: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary);
+      background: #e2e8f0;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      background: var(--card-bg);
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .content-section {
+      padding: 24px;
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    /* Presentation Walkthrough Styling */
+    .presentation-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .pres-step-indicator {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .pres-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+    }
+
+    .pres-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 16px 0;
+      min-height: 180px;
+    }
+
+    .pres-desc {
+      font-size: 1.02rem;
+      color: #334155;
+      line-height: 1.55;
+      max-width: 650px;
+      margin: 0 auto 20px auto;
+    }
+
+    .pres-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .pres-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      transition: all 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--primary);
+      width: 24px;
+      border-radius: 9999px;
+    }
+
+    /* Discovery Missions Tracker */
+    .mission-box {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+    }
+
+    .mission-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .mission-header h4 {
+      font-size: 0.95rem;
+      color: #166534;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mission-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 3px 8px;
+      border-radius: 9999px;
+    }
+
+    .mission-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .mission-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mission-item {
+      font-size: 0.85rem;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .mission-item.completed {
+      background: #dcfce7;
+      border-color: #86efac;
+      color: #166534;
+      font-weight: 600;
+    }
+
+    /* 3-Column Layout for Learn Tab */
+    .learn-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr 200px;
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .learn-layout {
+        grid-template-columns: 1fr;
+      }
+      .column-left, .column-right {
+        order: 2;
+      }
+      .column-center {
+        order: 1;
+      }
+    }
+
+    .column-left, .column-right {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .column-header {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .column-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .clock-svg-container {
+      width: 210px;
+      height: 210px;
+    }
+
+    .digital-box {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: #ffffff;
+      padding: 4px 18px;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      color: #0f172a;
+    }
+
+    .phrase-box {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      min-height: 36px;
+    }
+
+    .digital-alt-phrase {
+      font-size: 0.95rem;
+      color: #475569;
+      font-weight: 500;
+    }
+
+    .btn-audio {
+      background: #e0e7ff;
+      color: var(--primary);
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      transition: transform 0.1s ease, background 0.15s ease;
+    }
+
+    .btn-audio:hover {
+      background: #c7d2fe;
+      transform: scale(1.08);
+    }
+
+    .time-picker-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      font-size: 0.9rem;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .time-select {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      background: white;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn-time {
+      padding: 8px 10px;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-time:hover {
+      border-color: var(--primary);
+      background: #eef2ff;
+      color: var(--primary);
+    }
+
+    .btn-time.selected {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 8px rgba(79, 70, 229, 0.25);
+    }
+
+    .btn-time.selected span.time-tag {
+      color: #e0e7ff;
+    }
+
+    .time-tag {
+      font-size: 0.78rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .rule-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .rule-card h3 {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: #334155;
+    }
+
+    .rule-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      padding: 4px 9px;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
+
+    .pill-past { background: #d1fae5; color: #065f46; }
+    .pill-to { background: #fef3c7; color: #92400e; }
+    .pill-oclock { background: #e0e7ff; color: #3730a3; }
+    .pill-digital { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+
+    /* Quiz styling */
+    .quiz-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-btn {
+      padding: 14px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      background: white;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: #f5f3ff;
+    }
+
+    .option-btn.correct {
+      background: #dcfce7 !important;
+      border-color: var(--success) !important;
+      color: #166534 !important;
+    }
+
+    .option-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: var(--error) !important;
+      color: #991b1b !important;
+    }
+
+    .quiz-feedback {
+      margin-top: 16px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      min-height: 28px;
+    }
+
+    .btn-action {
+      padding: 10px 22px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+      color: #1e293b;
+    }
+
+    .score-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Pair Task styling */
+    .pair-selector {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .pair-btn {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid var(--border);
+      background: white;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.15s ease;
+    }
+
+    .pair-btn.active {
+      border-color: var(--primary);
+      background: #eef2ff;
+      color: var(--primary);
+    }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    .schedule-table th, .schedule-table td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+    }
+
+    .schedule-table th {
+      background: #f8fafc;
+      font-size: 0.9rem;
+      color: #475569;
+    }
+
+    .schedule-input {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      transition: border-color 0.15s ease;
+    }
+
+    .schedule-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .schedule-input.valid {
+      border-color: var(--success);
+      background: #f0fdf4;
+      color: #166534;
+      font-weight: 600;
+    }
+
+    .schedule-input.invalid {
+      border-color: var(--error);
+      background: #fef2f2;
+    }
+
+    .dialogue-prompt {
+      background: #e0f2fe;
+      border-left: 4px solid #0284c7;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      color: #0369a1;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .time-badge {
+      display: inline-block;
+      background: #ecfdf5;
+      color: #065f46;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid #a7f3d0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>⏰ Telling the Time in English</h1>
+      <p>Interactive Flipped Classroom Activity &bull; Level A1</p>
+    </header>
+
+    <div class="nav-tabs">
+      <button id="nav-btn-presentation" class="tab-btn active" onclick="switchTab('presentation')">🎬 1. Quick Guide</button>
+      <button id="nav-btn-learn" class="tab-btn" onclick="switchTab('learn')">📖 2. Explore & Missions</button>
+      <button id="nav-btn-quiz" class="tab-btn" onclick="switchTab('quiz')">🎯 3. Practice Quiz</button>
+      <button id="nav-btn-pair" class="tab-btn" onclick="switchTab('pair')">👥 4. Pair Homework</button>
+    </div>
+
+    <!-- TAB 1: PRESENTATION WALKTHROUGH -->
+    <div id="tab-presentation" class="content-section active">
+      <div class="presentation-card">
+        <div class="pres-step-indicator" id="pres-indicator">Step 1 of 3</div>
+        <h2 class="pres-title" id="pres-title">The Two Halves of the Clock</h2>
+        
+        <div class="pres-visual" id="pres-visual">
+          <!-- Dynamic Visual injected by JS -->
+        </div>
+
+        <p class="pres-desc" id="pres-desc">
+          Look at the clock face. It is divided into two distinct sides:<br/>
+          🟢 <strong>The Right Side (01–30 min):</strong> We say <strong>PAST</strong> the current hour.<br/>
+          🟡 <strong>The Left Side (31–59 min):</strong> We say <strong>TO</strong> the next hour.
+        </p>
+
+        <div class="pres-nav">
+          <button class="btn-action btn-secondary" id="pres-btn-prev" onclick="prevPresSlide()" style="visibility: hidden;">&larr; Back</button>
+          
+          <div class="pres-dots">
+            <span class="dot active" id="dot-0"></span>
+            <span class="dot" id="dot-1"></span>
+            <span class="dot" id="dot-2"></span>
+          </div>
+
+          <button class="btn-action" id="pres-btn-next" onclick="nextPresSlide()">Next &rarr;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: LEARN & EXPLORE WITH DISCOVERY MISSIONS -->
+    <div id="tab-learn" class="content-section">
+      <!-- Discovery Missions Banner -->
+      <div class="mission-box">
+        <div class="mission-header">
+          <h4>🎯 Discovery Missions <span id="mission-status-text"></span></h4>
+          <span class="mission-badge" id="mission-badge">0 / 4 Done</span>
+        </div>
+        <div class="mission-list">
+          <div class="mission-item" id="m-past">
+            <span class="m-icon">⭕</span> 1. Click a time on the <strong>PAST</strong> side
+          </div>
+          <div class="mission-item" id="m-to">
+            <span class="m-icon">⭕</span> 2. Click a time on the <strong>TO</strong> side
+          </div>
+          <div class="mission-item" id="m-audio">
+            <span class="m-icon">⭕</span> 3. Click 🔊 to hear pronunciation
+          </div>
+          <div class="mission-item" id="m-custom">
+            <span class="m-icon">⭕</span> 4. Use dropdowns to set a custom time
+          </div>
+        </div>
+      </div>
+
+      <div class="learn-layout">
+        <!-- LEFT COLUMN: PAST Times (1-30 min) -->
+        <div class="column-left">
+          <div class="column-header">🟢 Past (:00 - :25)</div>
+          <button class="btn-time selected" onclick="setLearnTime(8, 0, this)">
+            <strong>8:00</strong> <span class="time-tag">o'clock</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(12, 5, this)">
+            <strong>12:05</strong> <span class="time-tag">5 past</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(8, 10, this)">
+            <strong>8:10</strong> <span class="time-tag">10 past</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(8, 15, this)">
+            <strong>8:15</strong> <span class="time-tag">quarter past</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(4, 20, this)">
+            <strong>4:20</strong> <span class="time-tag">20 past</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(10, 25, this)">
+            <strong>10:25</strong> <span class="time-tag">25 past</span>
+          </button>
+        </div>
+
+        <!-- CENTER COLUMN: Clock, Visual Display, & Custom Picker -->
+        <div class="column-center">
+          <div class="clock-svg-container" id="learn-clock"></div>
+          <div class="digital-box" id="learn-digital">08:00</div>
+          
+          <div class="phrase-box">
+            <span id="learn-phrase">eight o'clock</span>
+            <button class="btn-audio" onclick="speakCurrentLearnTime()" title="Listen to pronunciation">🔊</button>
+          </div>
+          
+          <div class="digital-alt-phrase" id="learn-alt-phrase"></div>
+
+          <div style="font-size: 0.9rem; color: #64748b; text-align: center;" id="learn-sentence">
+            <em>Example:</em> "I start class <strong>at eight o'clock</strong>."
+          </div>
+
+          <!-- Custom Time Selector -->
+          <div class="time-picker-row">
+            <span>Try any time:</span>
+            <select id="sel-hour" class="time-select" onchange="onCustomTimeChange()">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8" selected>8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+            <span>:</span>
+            <select id="sel-minute" class="time-select" onchange="onCustomTimeChange()">
+              <option value="0" selected>00</option>
+              <option value="5">05</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="25">25</option>
+              <option value="30">30</option>
+              <option value="35">35</option>
+              <option value="40">40</option>
+              <option value="45">45</option>
+              <option value="50">50</option>
+              <option value="55">55</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: TO Times (30-55 min) -->
+        <div class="column-right">
+          <div class="column-header">🟡 To & Half (:30 - :55)</div>
+          <button class="btn-time" onclick="setLearnTime(8, 30, this)">
+            <strong>8:30</strong> <span class="time-tag">half past</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(7, 35, this)">
+            <strong>7:35</strong> <span class="time-tag">25 to</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(3, 40, this)">
+            <strong>3:40</strong> <span class="time-tag">20 to</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(8, 45, this)">
+            <strong>8:45</strong> <span class="time-tag">quarter to</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(8, 50, this)">
+            <strong>8:50</strong> <span class="time-tag">10 to</span>
+          </button>
+          <button class="btn-time" onclick="setLearnTime(9, 55, this)">
+            <strong>9:55</strong> <span class="time-tag">5 to</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="rule-card">
+        <h3>💡 Summary of Time Rules:</h3>
+        <div class="rule-pills">
+          <span class="pill pill-past"><strong>:05 - :25</strong> &rarr; [minutes] <strong>past</strong> [Hour]</span>
+          <span class="pill pill-past"><strong>:30</strong> &rarr; <strong>half past</strong> [Hour]</span>
+          <span class="pill pill-to"><strong>:35 - :55</strong> &rarr; [minutes] <strong>to</strong> [Next Hour]</span>
+          <span class="pill pill-digital"><strong>Digital Style:</strong> [Hour] + [Minutes] (e.g. 12:05 = <em>twelve oh-five</em>)</span>
+        </div>
+        <p style="font-size: 0.85rem; color: #64748b; margin-top: 10px;">
+          Always use preposition <strong>"at"</strong> with specific times: <em>"The train leaves <strong>at</strong> ten past eight (8:10)."</em>
+        </p>
+      </div>
+    </div>
+
+    <!-- TAB 3: PRACTICE QUIZ -->
+    <div id="tab-quiz" class="content-section">
+      <div id="quiz-container">
+        <!-- Dynamically rendered quiz content -->
+      </div>
+    </div>
+
+    <!-- TAB 4: PAIR HOMEWORK -->
+    <div id="tab-pair" class="content-section">
+      <div class="pair-selector">
+        <button class="pair-btn active" id="btn-student-a" onclick="selectStudent('A')">👤 I am Student A</button>
+        <button class="pair-btn" id="btn-student-b" onclick="selectStudent('B')">👤 I am Student B</button>
+      </div>
+
+      <div class="dialogue-prompt">
+        <strong>🗣️ Partner Speaking Instructions:</strong><br/>
+        1. <strong>Do not show your screen</strong> to your partner.<br/>
+        2. Look at your times (numbers only) and say them in English words to your partner.<br/>
+        3. Ask: <em>"What time does Sam [activity]?"</em> &bull; Answer: <em>"Sam [activity]s at [time in words]."</em><br/>
+        4. <strong>Important:</strong> Type your partner's answers <u>in words only</u> (e.g. <em>"half past seven"</em> or <em>"seven thirty"</em>). Numbers (e.g. <em>"7:30"</em>) will not be accepted!
+      </div>
+
+      <div id="schedule-container">
+        <!-- Table generated by JS -->
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="btn-action" onclick="checkSchedule()">Check My Answers</button>
+      </div>
+      <div id="schedule-feedback" style="margin-top: 12px; font-weight: 600; text-align: center;"></div>
+    </div>
+  </div>
+
+  <script>
+    // Audio synthesis helper
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    const numWords = ["twelve", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+
+    function getHourWord(h) {
+      const norm = ((h - 1) % 12 + 12) % 12 + 1;
+      return numWords[norm];
+    }
+
+    // Draw SVG Analog Clock
+    function createClockSVG(hours, minutes, customCenterText = "") {
+      const size = 200;
+      const center = size / 2;
+      const radius = 85;
+
+      const minuteAngle = minutes * 6;
+      const hourAngle = (hours % 12) * 30 + (minutes * 0.5);
+
+      let numbersHTML = '';
+      for (let i = 1; i <= 12; i++) {
+        const angle = (i * 30 - 90) * (Math.PI / 180);
+        const x = center + 65 * Math.cos(angle);
+        const y = center + 65 * Math.sin(angle) + 5;
+        numbersHTML += `<text x="${x}" y="${y}" text-anchor="middle" font-size="14" font-weight="600" fill="#334155">${i}</text>`;
+      }
+
+      let ticksHTML = '';
+      for (let m = 0; m < 60; m += 5) {
+        const angle = (m * 6 - 90) * (Math.PI / 180);
+        const x1 = center + 78 * Math.cos(angle);
+        const y1 = center + 78 * Math.sin(angle);
+        const x2 = center + 83 * Math.cos(angle);
+        const y2 = center + 83 * Math.sin(angle);
+        ticksHTML += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#94a3b8" stroke-width="2"/>`;
+      }
+
+      return `
+        <svg width="100%" height="100%" viewBox="0 0 ${size} ${size}">
+          <circle cx="${center}" cy="${center}" r="${radius}" fill="#ffffff" stroke="#cbd5e1" stroke-width="6"/>
+          
+          <path d="M ${center} ${center - radius + 3} A ${radius - 3} ${radius - 3} 0 0 1 ${center} ${center + radius - 3} Z" fill="#ecfdf5" opacity="0.6"/>
+          <path d="M ${center} ${center - radius + 3} A ${radius - 3} ${radius - 3} 0 0 0 ${center} ${center + radius - 3} Z" fill="#fffbeb" opacity="0.6"/>
+          
+          ${ticksHTML}
+          ${numbersHTML}
+          
+          <!-- Hour Hand -->
+          <line x1="${center}" y1="${center}" 
+                x2="${center + 45 * Math.sin(hourAngle * Math.PI / 180)}" 
+                y2="${center - 45 * Math.cos(hourAngle * Math.PI / 180)}" 
+                stroke="#1e293b" stroke-width="5" stroke-linecap="round"/>
+          
+          <!-- Minute Hand -->
+          <line x1="${center}" y1="${center}" 
+                x2="${center + 66 * Math.sin(minuteAngle * Math.PI / 180)}" 
+                y2="${center - 66 * Math.cos(minuteAngle * Math.PI / 180)}" 
+                stroke="#4f46e5" stroke-width="3.5" stroke-linecap="round"/>
+          
+          <circle cx="${center}" cy="${center}" r="5" fill="#4f46e5"/>
+        </svg>
+      `;
+    }
+
+    function timeToWords(h, m) {
+      const curHour = getHourWord(h);
+      const nextHour = getHourWord(h + 1);
+
+      if (m === 0) return `${curHour} o'clock`;
+      if (m === 5) return `five past ${curHour}`;
+      if (m === 10) return `ten past ${curHour}`;
+      if (m === 15) return `quarter past ${curHour}`;
+      if (m === 20) return `twenty past ${curHour}`;
+      if (m === 25) return `twenty-five past ${curHour}`;
+      if (m === 30) return `half past ${curHour}`;
+      if (m === 35) return `twenty-five to ${nextHour}`;
+      if (m === 40) return `twenty to ${nextHour}`;
+      if (m === 45) return `quarter to ${nextHour}`;
+      if (m === 50) return `ten to ${nextHour}`;
+      if (m === 55) return `five to ${nextHour}`;
+      return `${h}:${m < 10 ? '0' + m : m}`;
+    }
+
+    function digitalToWords(h, m) {
+      const curHour = getHourWord(h);
+      if (m === 0) return `${curHour} o'clock`;
+      const minMap = {
+        5: "oh-five",
+        10: "ten",
+        15: "fifteen",
+        20: "twenty",
+        25: "twenty-five",
+        30: "thirty",
+        35: "thirty-five",
+        40: "forty",
+        45: "forty-five",
+        50: "fifty",
+        55: "fifty-five"
+      };
+      return `${curHour} ${minMap[m] || m}`;
+    }
+
+    // ==========================================
+    // PRESENTATION WALKTHROUGH LOGIC
+    // ==========================================
+    const presSlides = [
+      {
+        step: "Step 1 of 3",
+        title: "The 2 Halves of the Clock",
+        renderVisual: () => `
+          <div style="display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;">
+            <div style="width: 170px; height: 170px;">${createClockSVG(12, 0)}</div>
+            <div style="text-align: left; font-size: 0.95rem;">
+              <div style="background:#d1fae5; color:#065f46; padding:8px 14px; border-radius:8px; margin-bottom:8px;">
+                🟢 <strong>Right Side (01–30 min):</strong> We use <strong>PAST</strong><br/>
+                <small><em>e.g. five past ten, quarter past two</em></small>
+              </div>
+              <div style="background:#fef3c7; color:#92400e; padding:8px 14px; border-radius:8px;">
+                🟡 <strong>Left Side (31–59 min):</strong> We use <strong>TO</strong><br/>
+                <small><em>e.g. twenty to five, quarter to eight</em></small>
+              </div>
+            </div>
+          </div>
+        `,
+        desc: "When the long minute hand is on the right side, count minutes <strong>past</strong> the current hour. When it moves to the left, count minutes <strong>to</strong> the next hour!"
+      },
+      {
+        step: "Step 2 of 3",
+        title: "The 4 Essential Landmark Times",
+        renderVisual: () => `
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; max-width: 600px; width: 100%;">
+            <div style="background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:10px; padding:10px; text-align:center;">
+              <div style="font-size:1.1rem; font-weight:700; color:#4f46e5;">8:00</div>
+              <div style="font-size:0.85rem; font-weight:600;">eight o'clock</div>
+            </div>
+            <div style="background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:10px; padding:10px; text-align:center;">
+              <div style="font-size:1.1rem; font-weight:700; color:#4f46e5;">8:15</div>
+              <div style="font-size:0.85rem; font-weight:600;">quarter past eight</div>
+            </div>
+            <div style="background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:10px; padding:10px; text-align:center;">
+              <div style="font-size:1.1rem; font-weight:700; color:#4f46e5;">8:30</div>
+              <div style="font-size:0.85rem; font-weight:600;">half past eight</div>
+            </div>
+            <div style="background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:10px; padding:10px; text-align:center;">
+              <div style="font-size:1.1rem; font-weight:700; color:#4f46e5;">8:45</div>
+              <div style="font-size:0.85rem; font-weight:600;">quarter to nine</div>
+            </div>
+          </div>
+        `,
+        desc: "Master these 4 key time markers first. Always remember to use the preposition <strong>'at'</strong>: <em>'Class starts <strong>at</strong> eight o'clock.'</em>"
+      },
+      {
+        step: "Step 3 of 3",
+        title: "Regular Minutes & Digital Style",
+        renderVisual: () => `
+          <div style="display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap;">
+            <div style="background:#eef2ff; border:1.5px solid #818cf8; border-radius:12px; padding:14px; text-align:center; min-width:180px;">
+              <div style="font-size:1.3rem; font-weight:800; color:#312e81;">12:05</div>
+              <div style="font-weight:700; color:#4f46e5; margin-top:4px;">five past twelve</div>
+              <div style="font-size:0.85rem; color:#64748b; margin-top:2px;">or "twelve oh-five"</div>
+            </div>
+            <div style="background:#eef2ff; border:1.5px solid #818cf8; border-radius:12px; padding:14px; text-align:center; min-width:180px;">
+              <div style="font-size:1.3rem; font-weight:800; color:#312e81;">8:50</div>
+              <div style="font-weight:700; color:#4f46e5; margin-top:4px;">ten to nine</div>
+              <div style="font-size:0.85rem; color:#64748b; margin-top:2px;">or "eight fifty"</div>
+            </div>
+          </div>
+        `,
+        desc: "You can express regular minutes using the <em>past/to</em> clock method or the simple <em>Hour + Minute</em> digital style! For single digits (:01–:09), say 'oh' (e.g. <em>twelve oh-five</em>)."
+      }
+    ];
+
+    let currentPresSlide = 0;
+
+    function renderPresSlide() {
+      const s = presSlides[currentPresSlide];
+      document.getElementById('pres-indicator').innerText = s.step;
+      document.getElementById('pres-title').innerText = s.title;
+      document.getElementById('pres-visual').innerHTML = s.renderVisual();
+      document.getElementById('pres-desc').innerHTML = s.desc;
+
+      for (let i = 0; i < 3; i++) {
+        document.getElementById(`dot-${i}`).classList.toggle('active', i === currentPresSlide);
+      }
+
+      document.getElementById('pres-btn-prev').style.visibility = currentPresSlide === 0 ? 'hidden' : 'visible';
+
+      const nextBtn = document.getElementById('pres-btn-next');
+      if (currentPresSlide === presSlides.length - 1) {
+        nextBtn.innerHTML = 'Start Exploring &rarr;';
+      } else {
+        nextBtn.innerHTML = 'Next &rarr;';
+      }
+    }
+
+    function nextPresSlide() {
+      if (currentPresSlide < presSlides.length - 1) {
+        currentPresSlide++;
+        renderPresSlide();
+      } else {
+        switchTab('learn');
+      }
+    }
+
+    function prevPresSlide() {
+      if (currentPresSlide > 0) {
+        currentPresSlide--;
+        renderPresSlide();
+      }
+    }
+
+    // ==========================================
+    // DISCOVERY MISSIONS TRACKER
+    // ==========================================
+    const missions = {
+      past: false,
+      to: false,
+      audio: false,
+      custom: false
+    };
+
+    function updateMissions() {
+      let count = 0;
+      if (missions.past) {
+        document.getElementById('m-past').classList.add('completed');
+        document.getElementById('m-past').querySelector('.m-icon').innerText = '✅';
+        count++;
+      }
+      if (missions.to) {
+        document.getElementById('m-to').classList.add('completed');
+        document.getElementById('m-to').querySelector('.m-icon').innerText = '✅';
+        count++;
+      }
+      if (missions.audio) {
+        document.getElementById('m-audio').classList.add('completed');
+        document.getElementById('m-audio').querySelector('.m-icon').innerText = '✅';
+        count++;
+      }
+      if (missions.custom) {
+        document.getElementById('m-custom').classList.add('completed');
+        document.getElementById('m-custom').querySelector('.m-icon').innerText = '✅';
+        count++;
+      }
+
+      document.getElementById('mission-badge').innerText = `${count} / 4 Done`;
+
+      if (count === 4) {
+        document.getElementById('mission-status-text').innerHTML = `<span style="color:var(--success); font-weight:700;">— All Missions Completed! 🎉</span>`;
+      }
+    }
+
+    // Tab Navigation
+    function switchTab(tabId) {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const sections = document.querySelectorAll('.content-section');
+      
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      const activeBtn = document.getElementById('nav-btn-' + tabId);
+      const activeSection = document.getElementById('tab-' + tabId);
+
+      if (activeBtn) activeBtn.classList.add('active');
+      if (activeSection) activeSection.classList.add('active');
+
+      if (tabId === 'presentation') {
+        renderPresSlide();
+      } else if (tabId === 'quiz') {
+        initQuiz();
+      } else if (tabId === 'pair') {
+        renderSchedule();
+      }
+    }
+
+    // Learn Tab State & Logic
+    let currentLearnH = 8;
+    let currentLearnM = 0;
+
+    function setLearnTime(h, m, btnElement) {
+      currentLearnH = h;
+      currentLearnM = m;
+
+      if (m > 0 && m <= 30) missions.past = true;
+      if (m > 30) missions.to = true;
+      updateMissions();
+
+      if (btnElement) {
+        document.querySelectorAll('.btn-time').forEach(b => b.classList.remove('selected'));
+        btnElement.classList.add('selected');
+      } else {
+        document.querySelectorAll('.btn-time').forEach(b => b.classList.remove('selected'));
+      }
+
+      document.getElementById('sel-hour').value = h;
+      document.getElementById('sel-minute').value = m;
+
+      const digStr = `${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m}`;
+      const words = timeToWords(h, m);
+      const digitalWords = digitalToWords(h, m);
+
+      document.getElementById('learn-clock').innerHTML = createClockSVG(h, m);
+      document.getElementById('learn-digital').innerText = digStr;
+      document.getElementById('learn-phrase').innerText = words;
+      
+      if (m !== 0 && words !== digitalWords) {
+        document.getElementById('learn-alt-phrase').innerHTML = `or digital: <em>"${digitalWords}"</em>`;
+      } else {
+        document.getElementById('learn-alt-phrase').innerHTML = ``;
+      }
+
+      document.getElementById('learn-sentence').innerHTML = `<em>Example:</em> "I start class <strong>at ${words}</strong>."`;
+    }
+
+    function onCustomTimeChange() {
+      const h = parseInt(document.getElementById('sel-hour').value);
+      const m = parseInt(document.getElementById('sel-minute').value);
+      missions.custom = true;
+      updateMissions();
+      setLearnTime(h, m, null);
+    }
+
+    function speakCurrentLearnTime() {
+      const phrase = document.getElementById('learn-phrase').innerText;
+      missions.audio = true;
+      updateMissions();
+      speakText(phrase);
+    }
+
+    // ==========================================
+    // DYNAMIC RANDOMIZED QUIZ GENERATOR
+    // ==========================================
+    function generateDistractors(h, m, correct) {
+      const curHour = getHourWord(h);
+      const nextHour = getHourWord(h + 1);
+      const prevHour = getHourWord(h - 1);
+
+      let pool = [];
+      if (m === 0) {
+        pool = [
+          `half past ${curHour}`,
+          `quarter past ${curHour}`,
+          `${nextHour} o'clock`,
+          `five past ${curHour}`
+        ];
+      } else if (m > 0 && m < 30) {
+        const mirrorMinWord = m === 5 ? "five to" : m === 10 ? "ten to" : m === 15 ? "quarter to" : m === 20 ? "twenty to" : "twenty-five to";
+        pool = [
+          `${mirrorMinWord} ${curHour}`,
+          `${mirrorMinWord} ${nextHour}`,
+          `${timeToWords(h, (m + 10) % 60)}`,
+          `${timeToWords(h + 1, m)}`,
+          `${curHour} o'clock`
+        ];
+      } else if (m === 30) {
+        pool = [
+          `half past ${nextHour}`,
+          `half past ${prevHour}`,
+          `quarter to ${nextHour}`,
+          `quarter past ${curHour}`
+        ];
+      } else {
+        const mirrorPastMin = 60 - m;
+        const mirrorPastWord = mirrorPastMin === 5 ? "five past" : mirrorPastMin === 10 ? "ten past" : mirrorPastMin === 15 ? "quarter past" : mirrorPastMin === 20 ? "twenty past" : "twenty-five past";
+        pool = [
+          `${mirrorPastWord} ${curHour}`,
+          `${mirrorPastWord} ${nextHour}`,
+          `${timeToWords(h, (m + 10) % 60)}`,
+          `${timeToWords(h - 1, m)}`,
+          `${nextHour} o'clock`
+        ];
+      }
+
+      const uniqueDistractors = [...new Set(pool.filter(d => d !== correct && d.length > 3))];
+      uniqueDistractors.sort(() => Math.random() - 0.5);
+      return uniqueDistractors.slice(0, 3);
+    }
+
+    function generateRandomQuiz(count = 5) {
+      const allMinutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+      const questions = [];
+
+      while (questions.length < count) {
+        const h = Math.floor(Math.random() * 12) + 1;
+        const m = allMinutes[Math.floor(Math.random() * allMinutes.length)];
+        
+        if (questions.some(q => q.h === h && q.m === m)) continue;
+
+        const correct = timeToWords(h, m);
+        const distractors = generateDistractors(h, m, correct);
+        const options = [correct, ...distractors].sort(() => Math.random() - 0.5);
+
+        questions.push({ h, m, correct, options });
+      }
+
+      return questions;
+    }
+
+    let quizQuestions = [];
+    let currentQ = 0;
+    let score = 0;
+
+    function initQuiz() {
+      quizQuestions = generateRandomQuiz(5);
+      currentQ = 0;
+      score = 0;
+      renderQuizContainer();
+      loadQuestion();
+    }
+
+    function renderQuizContainer() {
+      document.getElementById('quiz-container').innerHTML = `
+        <div class="score-banner">
+          <span>Question <span id="quiz-qnum">1</span> of 5</span>
+          <span>Score: <span id="quiz-score">0</span> / 100</span>
+        </div>
+        <div class="quiz-card">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 16px;">
+            <div class="clock-svg-container" id="quiz-clock"></div>
+            <div class="digital-box" id="quiz-digital">--:--</div>
+          </div>
+          <p style="font-size: 1.15rem; font-weight: 600; margin-bottom: 6px;">What time is it?</p>
+          <div class="quiz-options" id="quiz-options"></div>
+          <div class="quiz-feedback" id="quiz-feedback"></div>
+          <button class="btn-action" id="quiz-next-btn" style="display: none; margin-top: 16px;" onclick="nextQuestion()">Next Question &rarr;</button>
+        </div>
+      `;
+    }
+
+    function loadQuestion() {
+      const q = quizQuestions[currentQ];
+      document.getElementById('quiz-qnum').innerText = currentQ + 1;
+      document.getElementById('quiz-clock').innerHTML = createClockSVG(q.h, q.m);
+      document.getElementById('quiz-digital').innerText = `${q.h < 10 ? '0' + q.h : q.h}:${q.m < 10 ? '0' + q.m : q.m}`;
+      document.getElementById('quiz-feedback').innerText = '';
+      document.getElementById('quiz-next-btn').style.display = 'none';
+
+      const optsContainer = document.getElementById('quiz-options');
+      optsContainer.innerHTML = '';
+
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => selectOption(btn, opt, q.correct);
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function selectOption(selectedBtn, selectedText, correctText) {
+      const allBtns = document.querySelectorAll('.option-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      const feedback = document.getElementById('quiz-feedback');
+
+      if (selectedText === correctText) {
+        selectedBtn.classList.add('correct');
+        feedback.innerHTML = '<span style="color: var(--success);">🎉 Great job! Correct!</span>';
+        score += 20;
+        document.getElementById('quiz-score').innerText = score;
+        speakText("Correct! " + correctText);
+      } else {
+        selectedBtn.classList.add('wrong');
+        feedback.innerHTML = `<span style="color: var(--error);">❌ Not quite! The correct answer is <strong>${correctText}</strong>.</span>`;
+        allBtns.forEach(b => {
+          if (b.innerText === correctText) b.classList.add('correct');
+        });
+      }
+
+      document.getElementById('quiz-next-btn').style.display = 'inline-block';
+    }
+
+    function nextQuestion() {
+      currentQ++;
+      if (currentQ < quizQuestions.length) {
+        loadQuestion();
+      } else {
+        document.getElementById('quiz-container').innerHTML = `
+          <div class="quiz-card" style="padding: 40px 20px;">
+            <h2>🏆 Quiz Complete!</h2>
+            <p style="font-size: 1.3rem; margin: 16px 0; color: var(--primary);">Your Final Score: <strong>${score} / 100</strong></p>
+            <p style="color: #64748b; margin-bottom: 24px;">Great work! You can play another random set or move to the Pair Homework task.</p>
+            <button class="btn-action" onclick="initQuiz()">🔄 Play New Random Quiz</button>
+            <button class="btn-action" style="background:#10b981; margin-left: 10px;" onclick="switchTab('pair')">Go to Pair Homework &rarr;</button>
+          </div>
+        `;
+      }
+    }
+
+    // ==========================================
+    // PAIR HOMEWORK DATA & VERIFICATION
+    // ==========================================
+    const fullSchedule = [
+      { 
+        activity: "Wake up", 
+        time: "7:00", 
+        accepted: ["seven o clock", "seven oclock", "seven"], 
+        ownerA: true 
+      },
+      { 
+        activity: "Eat breakfast", 
+        time: "7:45", 
+        accepted: ["quarter to eight", "seven forty five"], 
+        ownerA: false 
+      },
+      { 
+        activity: "Meet friends at park", 
+        time: "10:15", 
+        accepted: ["quarter past ten", "ten fifteen"], 
+        ownerA: true 
+      },
+      { 
+        activity: "Have lunch", 
+        time: "12:30", 
+        accepted: ["half past twelve", "twelve thirty"], 
+        ownerA: false 
+      },
+      { 
+        activity: "Play football", 
+        time: "3:30", 
+        accepted: ["half past three", "three thirty"], 
+        ownerA: true 
+      },
+      { 
+        activity: "Watch a movie", 
+        time: "6:45", 
+        accepted: ["quarter to seven", "six forty five"], 
+        ownerA: false 
+      }
+    ];
+
+    let currentStudent = 'A';
+
+    function selectStudent(student) {
+      currentStudent = student;
+      document.getElementById('btn-student-a').classList.toggle('active', student === 'A');
+      document.getElementById('btn-student-b').classList.toggle('active', student === 'B');
+      renderSchedule();
+    }
+
+    function renderSchedule() {
+      const container = document.getElementById('schedule-container');
+      let rowsHTML = '';
+
+      fullSchedule.forEach((item, index) => {
+        const isMyData = (currentStudent === 'A' && item.ownerA) || (currentStudent === 'B' && !item.ownerA);
+        
+        if (isMyData) {
+          // Numbers only
+          rowsHTML += `
+            <tr>
+              <td><strong>${item.activity}</strong></td>
+              <td>
+                <span class="time-badge">${item.time}</span>
+              </td>
+            </tr>
+          `;
+        } else {
+          rowsHTML += `
+            <tr>
+              <td><strong>${item.activity}</strong></td>
+              <td>
+                <input type="text" class="schedule-input" data-index="${index}" placeholder="Type time in words only (e.g. half past seven)..." />
+              </td>
+            </tr>
+          `;
+        }
+      });
+
+      container.innerHTML = `
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Daily Routine Activity</th>
+              <th>Time (Sam's Schedule)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsHTML}
+          </tbody>
+        </table>
+      `;
+      document.getElementById('schedule-feedback').innerText = '';
+    }
+
+    function normalizeText(str) {
+      return str.toLowerCase().trim().replace(/['’-]/g, ' ').replace(/\s+/g, ' ');
+    }
+
+    function checkSchedule() {
+      const inputs = document.querySelectorAll('.schedule-input');
+      let allCorrect = true;
+      let filledCount = 0;
+      let usedDigits = false;
+
+      inputs.forEach(inp => {
+        const idx = parseInt(inp.getAttribute('data-index'));
+        const rawVal = inp.value.trim();
+        const normalizedVal = normalizeText(rawVal);
+        const acceptedList = fullSchedule[idx].accepted;
+
+        if (rawVal.length > 0) filledCount++;
+
+        // Reject numeric digits
+        if (/\d/.test(rawVal)) {
+          usedDigits = true;
+          inp.classList.remove('valid');
+          inp.classList.add('invalid');
+          allCorrect = false;
+          return;
+        }
+
+        const isMatch = acceptedList.some(acc => normalizeText(acc) === normalizedVal);
+
+        if (isMatch) {
+          inp.classList.add('valid');
+          inp.classList.remove('invalid');
+        } else {
+          inp.classList.remove('valid');
+          if (rawVal.length > 0) inp.classList.add('invalid');
+          allCorrect = false;
+        }
+      });
+
+      const fb = document.getElementById('schedule-feedback');
+      if (filledCount < inputs.length) {
+        fb.innerHTML = '<span style="color: #d97706;">⚠️ Please ask your partner and fill in all the missing times in words!</span>';
+      } else if (usedDigits) {
+        fb.innerHTML = '<span style="color: var(--error);">❌ Numbers (digits) are not allowed! Please write the time in English words (e.g. <em>"half past seven"</em> or <em>"seven thirty"</em>).</span>';
+      } else if (allCorrect) {
+        fb.innerHTML = '<span style="color: var(--success);">🎉 Excellent! All times are correctly written in words!</span>';
+      } else {
+        fb.innerHTML = '<span style="color: var(--error);">🔍 Some answers have spelling errors or incorrect words. Remember to use phrases like <em>"half past..."</em>, <em>"quarter past..."</em>, or <em>"quarter to..."</em>.</span>';
+      }
+    }
+
+    // Initialize presentation and default time
+    renderPresSlide();
+    setLearnTime(8, 0);
+  </script>
+</body>
+</html>
